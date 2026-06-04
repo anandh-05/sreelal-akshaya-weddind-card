@@ -19,6 +19,8 @@
 html {
   scroll-behavior: smooth;
   background: #0d0d0d;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: none;
 }
 
 body {
@@ -34,6 +36,8 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-overflow-scrolling: touch;
+  will-change: scroll-position;
 }
 
 button,
@@ -162,6 +166,115 @@ img {
 
 .reception-map iframe {
   filter: grayscale(1) invert(0.92) contrast(1.08) saturate(0.72);
+}
+
+/* GPU acceleration for smooth animations */
+.smooth-scroll {
+  scroll-behavior: smooth;
+}
+
+/* Optimize transform animations instead of position changes */
+@supports (transform: translate(0)) {
+  * {
+    will-change: auto;
+  }
+
+  *:hover,
+  *:active {
+    will-change: transform;
+  }
+}
+
+/* Universal Mobile Optimization - All Devices */
+@media (max-width: 1024px) {
+  /* iOS Safari optimization */
+  html,
+  body {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+
+  /* Android Chrome & Firefox Mobile */
+  body {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-drag: none;
+  }
+
+  /* Better touch handling */
+  button,
+  a,
+  [role="button"] {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+
+  /* Prevent zoom on input focus */
+  input,
+  textarea,
+  select {
+    font-size: 16px;
+  }
+
+  /* Samsung Internet optimization */
+  * {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+
+  /* Smooth animations on mobile */
+  *:not(.no-animate) {
+    will-change: auto;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+  }
+
+  /* Viewport height fix for mobile browsers */
+  #root {
+    min-height: 100vh;
+    min-height: 100svh;
+  }
+}
+
+/* Extra small devices optimization */
+@media (max-width: 480px) {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    height: 100svh;
+    overflow: hidden;
+  }
+
+  #root {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
+  /* Fast scroll on small devices */
+  * {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  button,
+  a,
+  input,
+  textarea {
+    -webkit-user-select: text;
+    user-select: text;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

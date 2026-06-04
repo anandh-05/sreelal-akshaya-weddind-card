@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { FiCalendar, FiClock, FiHeart, FiMapPin } from 'react-icons/fi'
+import { FiCalendar, FiClock, FiMapPin } from 'react-icons/fi'
 import { invitation } from '../data/invitation'
 import Reveal from './Reveal'
 import SectionHeader from './SectionHeader'
@@ -20,11 +20,6 @@ const details = [
     value: `${invitation.venue}, ${invitation.location}`,
     icon: FiMapPin,
   },
-  {
-    label: 'Dress Code',
-    value: invitation.dressCode,
-    icon: FiHeart,
-  },
 ]
 
 function EventDetails() {
@@ -35,7 +30,7 @@ function EventDetails() {
           A refined night reception with warm lights, deep red accents, and the people we love most.
         </SectionHeader>
 
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {details.map((item, index) => {
             const Icon = item.icon
 
